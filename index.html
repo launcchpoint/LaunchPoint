@@ -1,373 +1,603 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-site-verification" content="mq9YO9WqUNw8SoV4eTBNSv8X9hEt4pSGsy3HxOnRcB4" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Launch<span>Point</span></title>
-    <style>
-        /* General Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<meta name="google-site-verification" content="mq9YO9WqUNw8SoV4eTBNSv8X9hEt4pSGsy3HxOnRcB4"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LaunchPoint — Digital Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:        #f4f1ec;
+  --surface:   #ffffff;
+  --surface2:  #edeae4;
+  --border:    #ddd8d0;
+  --accent:    #2d6a8f;
+  --accent2:   #4a9aba;
+  --accent-dim:#e8f2f8;
+  --warm:      #c0622a;
+  --warm-dim:  #f8ede6;
+  --text:      #1c1c1c;
+  --muted:     #6b6560;
+  --radius:    14px;
+  --nav-h:     64px;
+}
 
-        body {
-            background-color: #062437;
-            color: #fff;
-            min-height: 100vh;
-        }
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        /* Navigation */
-        .nav {
-            display: flex;
-            justify-content: center;
-            background-color: #b93906;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
 
-        .nav button {
-            background: none;
-            border: none;
-            color: #000000;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-h);
+  background: rgba(244,241,236,0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 20px;
+}
 
-        .nav button:hover, .nav button.active {
-            color: #e53935;
-        }
+.nav-logo {
+  position: absolute;
+  left: 28px;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.5px;
+}
+.nav-logo span { color: var(--accent); }
 
-        
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 9px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 30px;
+  transition: background 0.2s, color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--text); background: var(--surface2); }
+.tab-btn.active { background: var(--accent); color: #fff; }
 
-        /* Sections */
-        .section {
-            display: none;
-            padding: 60px 20px;
-            max-width: 900px;
-            margin: auto;
-        }
+/* ── SECTIONS ── */
+.section { display: none; animation: fadeUp 0.4s ease both; }
+.section.active { display: block; }
 
-        .section.active {
-            display: block;
-        }
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(16px); }
+  to   { opacity:1; transform: translateY(0); }
+}
 
-        /* Home Logo */
-        .home-logo {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 30px;
-        }
+/* ── HOME ── */
+#home {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 70px 28px 80px;
+}
 
-        
-        
+.home-hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
 
-        
+.home-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent2);
+  background: var(--accent-dim);
+  padding: 5px 16px;
+  border-radius: 30px;
+  margin-bottom: 24px;
+}
 
-        /* Home Article */
-        .home-article {
-            font-size: 18px;
-            line-height: 1.7;
-             font-style: italic;
-        }
+.home-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 8vw, 72px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 22px;
+  letter-spacing: -0.5px;
+}
+.home-title span { color: var(--accent); }
 
-        .highlight {
-            color: #b93906;
-            cursor: pointer;
-            text-decoration: underline;
-        }
+.home-lead {
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--muted);
+  max-width: 620px;
+  margin: 0 auto 36px;
+}
 
-        /* Get Website */
-        .get-website, .get-flyers, .get-social {
-            width : 100%;
-            background-color: #1a1a1a;
-            border-radius: 8px;
-            border: 2px solid #a11f1f;
-            
-            border-color: #b93906;
-            max-width: 700px;
-            margin: auto;
-        }
-.get-website {
-            background-color: #1a1a1a;
-            color: #fff;
-            border: 2px solid #b93906;
-        }
-        .get-website {
-            background-color: #005bf900;
-            color: #fcfcfc;
-        }   
+.home-lead strong { color: var(--accent); font-weight: 600; cursor: pointer; }
+.home-lead strong:hover { text-decoration: underline; }
 
-        .get-website h2 {
-            color: #b93906;
-            margin-bottom: 15px;
-        }
+/* Service cards on home */
+.cards-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 48px;
+}
 
-        .get-website ul {
-            margin: 15px 0 20px 20px;
-        }
+.home-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 26px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+}
+.home-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(45,106,143,0.12);
+  border-color: var(--accent2);
+}
 
-        .get-website button {
-            background-color: #039520;
-            border: none;
-            padding: 12px 20px;
-            color: #181616;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
-        }
+.card-icon-ring {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  border: 1px solid var(--accent2);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+}
 
-        /* Get Flyers */
-        .get-flyers {
-            background-color:#062437;
-            color: #fff;
-            border: 2px solid #b93906;
-        }
+.card-icon-ring svg { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
-        .get-flyers h2 {
-            color: #b93906;
-            margin-bottom: 15px;
-        }
+.home-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+.home-card p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+.card-price {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+}
 
-        .get-flyers input, .get-flyers textarea {
-            width: 100%;
-            padding: 70px;
-            margin-bottom: 12px;
-            border: 1px solid #ff5252;
-            border-radius: 5px;
-            background-color: #111;
-            color: #fff;
-        }
+/* divider */
+.divider {
+  width: 48px; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
 
-        .get-flyers button {
-            background-color: #039520;
-            border: none;
-            padding: 12px 20px;
-            color: #181616
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
-        }
+/* ── INSTAGRAM CONTACTS ── */
+.contact-strip {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 60px;
+}
 
-        /* Get Social */
-        .get-social {
-            background-color: #062437;
-            color: #fff;
-        }
+.contact-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.contact-chip:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+.contact-chip .chip-label { color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+.contact-chip:hover .chip-label { color: rgba(255,255,255,0.7); }
 
-        .get-social h2 {
-            color: #b93906;
-            margin-bottom: 15px;
-        }
+/* ── SERVICE PAGES ── */
+.service-page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 70px 28px 80px;
+}
 
-        .get-social input, .get-social textarea, .get-social select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
-            border: 1px solid #42a5f5;
-            border-radius: 5px;
-            background-color: #b93906;
-            color: #fff;
-        }
+.page-eyebrow {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
 
-        .get-social button {
-            background-color: #039520;
-            border: none;
-            padding: 12px 20px;
-            color: #181616;;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
-        }
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 6vw, 48px);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+  color: var(--text);
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
 
-        /* Links */
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+.page-subtitle {
+  text-align: center;
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
-        a:hover {
-            text-decoration: underline;
-        }
+.prose-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--muted);
+}
 
-    </style>
+.prose-card p + p { margin-top: 14px; }
+
+.req-block {
+  background: var(--accent-dim);
+  border: 1px solid var(--accent2);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+}
+
+.req-block h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.req-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.req-list li {
+  font-size: 14px;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.6;
+}
+
+.req-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 7px;
+}
+
+.pricing-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--warm-dim);
+  border: 1px solid #e0b89a;
+  border-radius: 30px;
+  padding: 8px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--warm);
+  margin-bottom: 28px;
+}
+
+.note-text {
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.proceed-btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  text-transform: uppercase;
+}
+.proceed-btn:hover {
+  background: #235a7a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(45,106,143,0.25);
+}
+.proceed-btn:active { transform: scale(0.98); }
+
+.proceed-btn.warm {
+  background: var(--warm);
+}
+.proceed-btn.warm:hover {
+  background: #a04e1e;
+  box-shadow: 0 6px 24px rgba(192,98,42,0.25);
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 28px 20px;
+  font-size: 13px;
+  color: var(--muted);
+  background: var(--surface2);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 560px) {
+  .nav-logo { display: none; }
+  .tab-btn { padding: 8px 11px; font-size: 13px; }
+  .service-page, #home { padding: 40px 18px 60px; }
+  .prose-card, .req-block { padding: 22px 18px; }
+}
+</style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <div class="nav">
-        <button class="tab-btn active" data-tab="home">Home</button>
-        <button class="tab-btn" data-tab="website">Get Website</button>
-        <button class="tab-btn" data-tab="flyers">Get Flyers</button>
-        <button class="tab-btn" data-tab="social">Get Social Account</button>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Launch<span>Point</span></div>
+  <button class="tab-btn active" data-tab="home">Home</button>
+  <button class="tab-btn" data-tab="website">Website</button>
+  <button class="tab-btn" data-tab="flyers">Flyers</button>
+  <button class="tab-btn" data-tab="social">Social Media</button>
+</nav>
+
+<!-- ══════════ HOME ══════════ -->
+<div id="home" class="section active">
+  <div id="home-inner">
+    <div class="home-hero">
+      <div class="home-eyebrow">Fresno, CA &mdash; Digital Services</div>
+      <h1 class="home-title">We Build Your<br><span>Digital Presence</span></h1>
+      <p class="home-lead">
+        LaunchPoint is a professional team helping businesses grow digitally and visually. We specialize in
+        <strong onclick="openTab('website')">Website Development</strong>,
+        <strong onclick="openTab('flyers')">Flyer Design</strong>, and
+        <strong onclick="openTab('social')">Social Media Setup</strong> &mdash;
+        each handled by a dedicated specialist with quality, clarity, and the best price possible.
+      </p>
+      <div class="divider"></div>
     </div>
 
-    <!-- Help Menu -->
-    <div class="help-menu" onclick="alert('Navigate by clicking the tabs on top. Click highlights on Home to go to services.');">
-        
+    <div class="cards-row">
+      <div class="home-card" onclick="openTab('website')">
+        <div class="card-icon-ring">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <h3>Website Development</h3>
+        <p>Clean, structured websites that build credibility and represent your brand with confidence.</p>
+        <div class="card-price">$24.99</div>
+      </div>
+
+      <div class="home-card" onclick="openTab('flyers')">
+        <div class="card-icon-ring">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3>Flyer Design</h3>
+        <p>Eye-catching, polished flyers that communicate your message within seconds.</p>
+        <div class="card-price">$5</div>
+      </div>
+
+      <div class="home-card" onclick="openTab('social')">
+        <div class="card-icon-ring">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <h3>Social Media Setup</h3>
+        <p>Branded, professional social accounts that build your presence from day one.</p>
+        <div class="card-price">$10 / account</div>
+      </div>
     </div>
 
-    <!-- Home Section -->
-    <div id="home" class="section active">
-        <div class="home-logo">
-            
-            <h1>Launch<span class="highlight">Point</span></h1>
-            <h2 style="align-self:flex-start; margin-top:10px;">What LaunchPoint Offers</h2>
-        </div>
-        <div class="home-article">
-            LaunchPoint is a professional company helping businesses grow digitally and visually. We specialize in <span class="highlight" onclick="openTab('website')">Website Development</span>, <span class="highlight" onclick="openTab('flyers')">Flyer & Visual Design</span>, and <span class="highlight" onclick="openTab('social')">Social Media Account Setup</span>. Each service is handled by a dedicated specialist, ensuring quality, clarity, and efficiency. We give you our best on every aspect we cover, with the cheapest price possible. We are here to help you get your business up and running with a strong online presence and eye-catching visuals. Whether you need a sleek website, attention-grabbing flyers, or a solid social media foundation, LaunchPoint has got you covered. Let's work together to bring your vision to life and make your business stand out in the digital world.
-        </div>
-        <br>
-        <footer style="text-align: center; padding: 15px; font-family: Arial, sans-serif; font-size: 14px;">
-  <div>Connect to us on Instagram</div>
-  <div style="margin-top: 5px;">
-    <a 
-      href="https://www.instagram.com/clementine1610__7?igsh=NTc4MTIwNjQ2YQ==" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      style="display: inline-block; margin: 10px 15px; padding: 8px 12px; background-color: #b93906; color: #000; text-decoration: none; border-radius: 5px; font-size: 14px;"
-    >
-      For Website
-    </a>
-    <a 
-      href="https://www.instagram.com/jordaniandamandalanda?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      style="display: inline-block; margin: 10px 15px; padding: 8px 12px; background-color: #b93906; color: #000; text-decoration: none; border-radius: 5px; font-size: 14px;"
-    >
-      For social Account
-    </a>
-    <a 
-      href="https://www.instagram.com/__ramosir?igsh=NTc4MTIwNjQ2YQ==" 
-      target="_blank" 
-      rel="noopener noreferrer"
-      style="display: inline-block; margin: 10px 15; padding: 8px 12px; background-color: #b93906; color: #000; text-decoration: none; border-radius: 5px; font-size: 14px;"
-    >
-      For Flier
-    </a>
+    <div class="contact-strip">
+      <a class="contact-chip" href="https://www.instagram.com/clementine1610__7?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">
+        <span class="chip-label">Website</span> @clementine1610__7
+      </a>
+      <a class="contact-chip" href="https://www.instagram.com/jordaniandamandalanda?igsh=NTc4MTIwNjQ2YQ%3D%3D" target="_blank" rel="noopener">
+        <span class="chip-label">Social</span> @jordaniandamandalanda
+      </a>
+      <a class="contact-chip" href="https://www.instagram.com/__ramosir?igsh=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">
+        <span class="chip-label">Flyers</span> @__ramosir
+      </a>
+    </div>
   </div>
-</footer>
-       
-    
-    
-  
-        <br>
-         <footer style="text-align: center; padding: 20px; font-family: Arial, sans-serif;">
-    <p align="center">LaunchPoint – Fresno, CA | © 2026</p>
+
+  <footer class="site-footer">
+    LaunchPoint &mdash; Fresno, CA &nbsp;&middot;&nbsp; &copy; 2026
   </footer>
+</div>
 
+<!-- ══════════ WEBSITE ══════════ -->
+<div id="website" class="section">
+  <div class="service-page">
+    <span class="page-eyebrow">Our Services</span>
+    <h2 class="page-title">Website Development</h2>
+    <p class="page-subtitle">Your digital foundation &mdash; built clean, fast, and with confidence.</p>
+
+    <div class="prose-card">
+      <p>A website is the digital foundation of any modern business. It builds credibility, strengthens trust, and allows customers to learn about your services at any time. In today's world, most people search online before making decisions, and a professional website immediately positions your brand as serious and established.</p>
+      <p>At LaunchPoint, we design clean, structured, and professional websites that clearly communicate your message and represent your brand with confidence. Our focus is simplicity, clarity, and effectiveness &mdash; ensuring your website is visually appealing, easy to navigate, and aligned with your goals.</p>
+      <p>Delivery is completed within 2 to 4 days. Timeline updates are provided through direct messaging, and minor revisions are included before final delivery to ensure your satisfaction.</p>
     </div>
 
-    <!-- Get Website -->
-    <div id="website" class="section get-website">
-        <h2>Ready to turn your idea into a website?</h2>
-        <p style="font-style: italic;">A website is the digital foundation of any modern business. It builds credibility, strengthens trust, and allows customers to learn about your services at any time. In today’s world, most people search online before making decisions, and a professional website immediately positions your brand as serious and established. Without one, valuable opportunities can easily be missed.
-
-At LaunchPoint, we design clean, structured, and professional websites that clearly communicate your message and represent your brand with confidence. Our focus is simplicity, clarity, and effectiveness — ensuring your website is visually appealing, easy to navigate, and aligned with your goals. The service requires a one-time payment of $24.99, and delivery is completed within 2 to 4 days. Throughout the process, timeline updates are provided through direct messaging, and minor revisions are included before final delivery to ensure satisfaction.</p>
-        <br>
-        <h3>To get started, please make sure to have the required information ready:</h3>
-        <ul>
-            <li>Business Name</li>
-            <li>Logo (if available)</li>
-            <li>Description of offerings</li>
-            <li>Preferred colors for the website</li>
-            <li>Any specific structure or layout requirements</li>
-        </ul>
-        <br>
-        <p>(By clicking Proceed button, User will be redirected to SMS Messaging for discussion)</p>
-        <button onclick="window.location.href='sms:5593168075?body=Hey LaunchPoint, Can I get a website with... (describe how you want it)'">PROCEED</button>
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="pricing-badge">One-time payment &mdash; $24.99</div>
     </div>
 
-    <!-- Get Flyers -->
-    <div id="flyers" class="section get-flyers">
-        <h2>Ready to make your idea seen by many?</h2>
-        <p style="font-style: italic;">Flyers remain one of the most effective and affordable marketing tools available. A strong flyer captures attention instantly and communicates your message within seconds. Whether you are promoting a sale, launching a new service, advertising an event, or spreading awareness, professional design makes your idea visible and memorable.
+    <div class="req-block">
+      <h4>What to Have Ready</h4>
+      <ul class="req-list">
+        <li>Business name</li>
+        <li>Logo (if available)</li>
+        <li>Description of your offerings</li>
+        <li>Preferred colors for the website</li>
+        <li>Any specific structure or layout requirements</li>
+      </ul>
+    </div>
 
-At LaunchPoint, we create visually clean and impactful flyer designs that combine clarity with strong presentation. Each flyer is structured to stand out while maintaining a professional and polished appearance. The cost to create a flyer design is $5, with optional printed copies available at $3 per 10 copies. Delivery is completed within 1 to 3 days, and timeline updates are provided through direct messaging. Minor revisions are included before final approval to ensure the final product reflects your vision accurately.</p>
-        <h3>To get started, please provide the following details:</h3>
-        <br>
-    <ul>
+    <p class="note-text">Clicking Proceed will open SMS messaging for direct discussion.</p>
+    <button class="proceed-btn" onclick="window.location.href='sms:5593168075?body=Hey LaunchPoint, Can I get a website with... (describe how you want it)'">
+      Proceed &mdash; Get a Website
+    </button>
+  </div>
+
+  <footer class="site-footer">
+    LaunchPoint &mdash; Fresno, CA &nbsp;&middot;&nbsp; &copy; 2026
+  </footer>
+</div>
+
+<!-- ══════════ FLYERS ══════════ -->
+<div id="flyers" class="section">
+  <div class="service-page">
+    <span class="page-eyebrow">Our Services</span>
+    <h2 class="page-title">Flyer Design</h2>
+    <p class="page-subtitle">Visuals that stop people in their tracks and communicate your message in seconds.</p>
+
+    <div class="prose-card">
+      <p>Flyers remain one of the most effective and affordable marketing tools available. A strong flyer captures attention instantly and communicates your message within seconds. Whether you are promoting a sale, launching a new service, advertising an event, or spreading awareness, professional design makes your idea visible and memorable.</p>
+      <p>At LaunchPoint, we create visually clean and impactful flyer designs that combine clarity with strong presentation. Each flyer is structured to stand out while maintaining a professional and polished appearance. Minor revisions are included before final approval to ensure the final product reflects your vision accurately.</p>
+      <p>Delivery is completed within 1 to 3 days, with timeline updates provided through direct messaging.</p>
+    </div>
+
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="pricing-badge">Design &mdash; $5 &nbsp;&nbsp;&middot;&nbsp;&nbsp; Printed copies &mdash; $3 per 10</div>
+    </div>
+
+    <div class="req-block">
+      <h4>What to Have Ready</h4>
+      <ul class="req-list">
         <li>What is the flyer about?</li>
-        <li>What should be on the flyer? (QR code, Logo, etc.)</li>
-        <li>Preferred colors</li>
-        <li>Anything else you want on the flyer?</li>
-    </Ul>
-        <br>
-        <p>(By clicking the Proceed button,User will be redirected to our instagram account, please message us "LaunchPoint" to get all the details.)</p>
-        <br>
-
-    
-        <button onclick="window.location.href='https://www.instagram.com/__ramosir/'">POCEED</button>
-
+        <li>What elements should be included? (QR code, logo, etc.)</li>
+        <li>Preferred colors and style</li>
+        <li>Any additional details or copy for the flyer</li>
+      </ul>
     </div>
 
-    <!-- Get Social Account -->
-    <div id="social" class="section get-social">
-        <h2>Ready to grow your presence online?</h2>
-        <p style="font-style: italic;">Social media platforms are essential tools for building visibility, credibility, and engagement in today’s digital environment. A properly structured social media account creates a professional first impression and helps establish your brand presence from the very beginning. Whether for business or personal branding, a well-set-up account provides the foundation for growth and recognition.
+    <p class="note-text">Clicking Proceed will open our Instagram &mdash; please send a message to begin.</p>
+    <button class="proceed-btn warm" onclick="window.location.href='https://www.instagram.com/__ramosir/'">
+      Proceed &mdash; Get a Flyer
+    </button>
+  </div>
 
-At LaunchPoint, we assist in setting up organized and branded social media accounts tailored to your needs. Clients may choose to register using either a phone number or an email address, depending on their preference. The setup service is priced at $10 per account, with delivery completed within 1 to 3 days. Timeline updates are provided through direct messaging, and all account details are securely delivered upon completion to ensure a smooth and professional experience.</p>
-        <h3>To get started, please provide the following details:</h3>
-        <br>
-        <ul>
-            <li>Platform(s) required</li>
-            <li>Business name / handle preferences</li>
-            <li>Logo / branding materials</li>
-            <li>Content focus</li>
-            <li>Account registration preference (email or phone)</li>
-            <li>Special instructions / themes</li>
-        </ul>
-        <br>
-        <p>(By clicking the proceed button, user will be redirected to SMS messaging for discussion)</p>
-        <br>
-        <button onclick="window.location.href='sms:5592463134?body=Hey LaunchPoint, I’d like to set up social media accounts for... (platforms / details)'">PROCEED</button>
+  <footer class="site-footer">
+    LaunchPoint &mdash; Fresno, CA &nbsp;&middot;&nbsp; &copy; 2026
+  </footer>
+</div>
+
+<!-- ══════════ SOCIAL ══════════ -->
+<div id="social" class="section">
+  <div class="service-page">
+    <span class="page-eyebrow">Our Services</span>
+    <h2 class="page-title">Social Media Setup</h2>
+    <p class="page-subtitle">A professional first impression starts with a properly structured account.</p>
+
+    <div class="prose-card">
+      <p>Social media platforms are essential tools for building visibility, credibility, and engagement in today's digital environment. A properly structured social media account creates a professional first impression and helps establish your brand presence from the very beginning. Whether for business or personal branding, a well-set-up account provides the foundation for growth and recognition.</p>
+      <p>At LaunchPoint, we assist in setting up organized and branded social media accounts tailored to your needs. Clients may choose to register using either a phone number or an email address, depending on their preference. All account details are securely delivered upon completion to ensure a smooth and professional experience.</p>
+      <p>Delivery is completed within 1 to 3 days, with timeline updates provided throughout the process.</p>
     </div>
 
-    <!-- Scripts -->
-    <script>
-        const tabs = document.querySelectorAll('.tab-btn');
-        const sections = document.querySelectorAll('.section');
+    <div style="text-align:center;margin-bottom:28px;">
+      <div class="pricing-badge">$10 per account</div>
+    </div>
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(btn => btn.classList.remove('active'));
-                tab.classList.add('active');
+    <div class="req-block">
+      <h4>What to Have Ready</h4>
+      <ul class="req-list">
+        <li>Platform or platforms required</li>
+        <li>Business name and handle preferences</li>
+        <li>Logo or branding materials</li>
+        <li>Content focus and account theme</li>
+        <li>Registration preference &mdash; email or phone number</li>
+        <li>Any special instructions or style preferences</li>
+      </ul>
+    </div>
 
-                const target = tab.getAttribute('data-tab');
-                sections.forEach(sec => sec.classList.remove('active'));
-                document.getElementById(target).classList.add('active');
-            });
-        });
+    <p class="note-text">Clicking Proceed will open SMS messaging for direct discussion.</p>
+    <button class="proceed-btn" onclick="window.location.href='sms:5592463134?body=Hey LaunchPoint, I\'d like to set up social media accounts for... (platforms / details)'">
+      Proceed &mdash; Set Up Social Media
+    </button>
+  </div>
 
-        function openTab(tabId) {
-            document.querySelector(`.tab-btn[data-tab=${tabId}]`).click();
-        }
-    </script>
+  <footer class="site-footer">
+    LaunchPoint &mdash; Fresno, CA &nbsp;&middot;&nbsp; &copy; 2026
+  </footer>
+</div>
 
+<script>
+const tabs = document.querySelectorAll('.tab-btn');
+const sections = document.querySelectorAll('.section');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const target = tab.getAttribute('data-tab');
+    sections.forEach(s => s.classList.remove('active'));
+    document.getElementById(target).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+function openTab(id) {
+  document.querySelector(`.tab-btn[data-tab="${id}"]`).click();
+}
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
